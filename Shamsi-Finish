@@ -1,0 +1,71 @@
+INT(([Scheduled Finish]-7385)/365.25)+1299 & "/" & 
+IIf(
+    (IIf(
+        INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)<186, 
+        INT(INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)/31) + 1, 
+        IIf(
+            ((INT(([Scheduled Finish]-7385)/365.25)) Mod (4))=0, 
+            INT((INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)-186)/30) + 6, 
+            IIf(
+                INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)<336, 
+                INT((INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)-186)/30) + 6, 
+                INT((INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)-336)/29) + 11
+            )
+        )
+    ) Mod 12 + 1) < 10,
+    "0" & (IIf(
+        INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)<186, 
+        INT(INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)/31) + 1, 
+        IIf(
+            ((INT(([Scheduled Finish]-7385)/365.25)) Mod (4))=0, 
+            INT((INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)-186)/30) + 6, 
+            IIf(
+                INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)<336, 
+                INT((INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)-186)/30) + 6, 
+                INT((INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)-336)/29) + 11
+            )
+        )
+    ) Mod 12 + 1), 
+    (IIf(
+        INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)<186, 
+        INT(INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)/31) + 1, 
+        IIf(
+            ((INT(([Scheduled Finish]-7385)/365.25)) Mod (4))=0, 
+            INT((INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)-186)/30) + 6, 
+            IIf(
+                INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)<336, 
+                INT((INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)-186)/30) + 6, 
+                INT((INT(((INT([Scheduled Finish]-7385)*100) Mod (36525))/100)-336)/29) + 11
+            )
+        )
+    ) Mod 12 + 1)
+) & "/" & 
+IIf(
+    INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100)<186, 
+    IIf(
+        (INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100) Mod 31) + 1 < 10, 
+        "0" & (INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100) Mod 31) + 1, 
+        (INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100) Mod 31) + 1
+    ), 
+    IIf(
+        (INT(([Scheduled Finish]-7385)/365.25) Mod 4)=0, 
+        IIf(
+            ((INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100)-186) Mod 30) + 1 < 10, 
+            "0" & ((INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100)-186) Mod 30) + 1, 
+            ((INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100)-186) Mod 30) + 1
+        ), 
+        IIf(
+            INT(((INT([Scheduled Finish]-7385)*100) Mod 36525)/100)<336, 
+            IIf(
+                ((INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100)-186) Mod 30) + 1 < 10, 
+                "0" & ((INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100)-186) Mod 30) + 1, 
+                ((INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100)-186) Mod 30) + 1
+            ), 
+            IIf(
+                ((INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100)-336) Mod 29) + 1 < 10, 
+                "0" & ((INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100)-336) Mod 29) + 1, 
+                ((INT((INT([Scheduled Finish]-7385)*100 Mod 36525)/100)-336) Mod 29) + 1
+            )
+        )
+    )
+)
